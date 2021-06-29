@@ -7,7 +7,7 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/welcome',
+      // initialRoute: '/welcome',
       routes: {
         '/welcome': (context) => Welcome(),
         '/login': (context) => Login()
