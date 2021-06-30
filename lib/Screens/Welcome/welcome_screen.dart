@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nysc/Screens/Login/login_screen.dart';
+import 'package:nysc/Screens/Security/security_screen.dart';
 import 'package:nysc/Screens/Welcome/components/body.dart';
 
 class Welcome extends StatelessWidget {
@@ -10,7 +11,8 @@ class Welcome extends StatelessWidget {
       // initialRoute: '/welcome',
       routes: {
         '/welcome': (context) => Welcome(),
-        '/login': (context) => Login()
+        '/login': (context) => Login(),
+        '/security': (context) => Security()
       },
       home: Scaffold(
         backgroundColor: Colors.white,
