@@ -10,19 +10,19 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
 
-  static List<String> dashboardRoutes = [
-    '/dashboard',
-    '/security',
-    '/welcome',
-    '/login'
-  ];
+  // static List<String> dashboardRoutes = [
+  //   '/dashboard',
+  //   '/security',
+  //   '/welcome',
+  //   '/login'
+  // ];
 
   _onItemTapped(int index) {
-    print(index);
-    Navigator.pushNamed(
-        context,
-        // dashboardRoutes.elementAt(_selectedIndex),
-        '/security');
+    Navigator.pushNamed(context, '/security');
+    // Navigator.pushNamed(
+    //     context,
+    // dashboardRoutes.elementAt(_selectedIndex),
+    // '/security');
     // setState(() {
     //   _selectedIndex = index;
     // });
@@ -461,7 +461,7 @@ class _DashboardState extends State<Dashboard> {
           unselectedItemColor: Color(0xFFC4C4C4),
           unselectedLabelStyle: TextStyle(color: Color(0xFFC4C4C4)),
           showUnselectedLabels: true,
-          onTap: _onItemTapped(_selectedIndex),
+          onTap: _onItemTapped,
         ),
       ),
     );
