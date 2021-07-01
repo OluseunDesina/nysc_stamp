@@ -18,14 +18,10 @@ class _DashboardState extends State<Dashboard> {
   ];
 
   _onItemTapped(int index) {
-    print(index);
     Navigator.pushNamed(
-        context,
-        // dashboardRoutes.elementAt(_selectedIndex),
-        '/security');
-    // setState(() {
-    //   _selectedIndex = index;
-    // });
+      context,
+      dashboardRoutes.elementAt(index),
+    );
   }
 
   @override
@@ -461,7 +457,9 @@ class _DashboardState extends State<Dashboard> {
           unselectedItemColor: Color(0xFFC4C4C4),
           unselectedLabelStyle: TextStyle(color: Color(0xFFC4C4C4)),
           showUnselectedLabels: true,
-          onTap: _onItemTapped(_selectedIndex),
+          onTap: (index) {
+            _onItemTapped(index);
+          },
         ),
       ),
     );
