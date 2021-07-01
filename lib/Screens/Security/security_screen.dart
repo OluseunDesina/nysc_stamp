@@ -8,6 +8,12 @@ class Security extends StatefulWidget {
 
 class _SecurityState extends State<Security> {
   int _selectedIndex = 1;
+  static List<String> dashboardRoutes = [
+    '/dashboard',
+    '/security',
+    '/welcome',
+    '/login'
+]
   List<String> items = [
     'Robbery',
     'Riot',
@@ -17,10 +23,11 @@ class _SecurityState extends State<Security> {
     'Civil Unrest'
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  _onItemTapped(int index) {
+    Navigator.pushNamed(
+      context,
+      dashboardRoutes.elementAt(index),
+    );
   }
 
   @override
@@ -173,7 +180,9 @@ class _SecurityState extends State<Security> {
         unselectedItemColor: Color(0xFFC4C4C4),
         unselectedLabelStyle: TextStyle(color: Color(0xFFC4C4C4)),
         showUnselectedLabels: true,
-        onTap: _onItemTapped,
+        onTap: (index) {
+          _onItemTapped(index);
+        },
       ),
     );
   }
