@@ -8,6 +8,14 @@ class Security extends StatefulWidget {
 
 class _SecurityState extends State<Security> {
   int _selectedIndex = 1;
+  List<String> items = [
+    'Robbery',
+    'Riot',
+    'Accident',
+    'Kidnapping',
+    'Medical',
+    'Civil Unrest'
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -97,7 +105,45 @@ class _SecurityState extends State<Security> {
       body: Body(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF269400),
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return Column(
+                  children: [
+                    Icon(Icons.close),
+                    Text('Report Incidence'),
+                    Text('Enter Location'),
+                    TextField(
+                      decoration: InputDecoration(
+                          fillColor: Color.fromRGBO(242, 246, 255, 0.1),
+                          focusColor: Color.fromRGBO(242, 246, 255, 0.1),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(174, 227, 156, 1))),
+                          labelText: 'Enter Surname',
+                          labelStyle: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                              color: Color.fromRGBO(174, 227, 156, 1))),
+                    ),
+                    Text('Incident Type'),
+                    ListView.builder(
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        return Row(children: [
+                          InputChip(
+                            label: Text('${items[index]}'),
+                          ),
+                        ]);
+                      },
+                    )
+                  ],
+                );
+              });
+          // buildShowSecurityStatusModalBottomSheet(context);
+        },
         child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -130,5 +176,96 @@ class _SecurityState extends State<Security> {
         onTap: _onItemTapped,
       ),
     );
+  }
+
+  Future<dynamic> buildShowSecurityStatusModalBottomSheet(
+      BuildContext context) {
+    return showModalBottomSheet(
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        context: context,
+        builder: (context) {
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.70,
+            padding:
+                const EdgeInsets.only(top: 30, left: 20, bottom: 30, right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      child: Icon(Icons.close),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+                Text(
+                  'Security Status',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                    color: Color(0xFF269400),
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Text(
+                  'Thank you for submitting an incidental report. We will like to confirm your safety at the moment',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      color: Color(0xFF535C6F)),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Text(
+                  'Failure to respond to this request in 10 minutes, we will automatically register you as unsafe',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      color: Color(0xFF269400)),
+                ),
+                Spacer(),
+                SizedBox(
+                  height: 50,
+                  child: ElevatedButton(
+                    child: Text('I am Safe, thanks',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 15)),
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF269400),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 50,
+                  child: ElevatedButton(
+                    child: Text('I am not Safe, Send help',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 15)),
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFFFF2626),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }
