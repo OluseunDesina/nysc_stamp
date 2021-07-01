@@ -10,12 +10,12 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
 
-  static List<String> dashboardRoutes = [
-    '/dashboard',
-    '/security',
-    '/welcome',
-    '/login'
-  ];
+  // static List<String> dashboardRoutes = [
+  //   '/dashboard',
+  //   '/security',
+  //   '/welcome',
+  //   '/login'
+  // ];
 
   _onItemTapped(int index) {
     Navigator.pushNamed(
@@ -460,6 +460,7 @@ class _DashboardState extends State<Dashboard> {
           onTap: (index) {
             _onItemTapped(index);
           },
+
         ),
       ),
     );
