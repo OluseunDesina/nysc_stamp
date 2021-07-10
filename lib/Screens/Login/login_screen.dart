@@ -43,6 +43,9 @@ class Login extends StatelessWidget {
                       fontStyle: FontStyle.normal,
                       color: Color.fromRGBO(174, 227, 156, 1)),
                 ),
+                SizedBox(
+                  height: 35,
+                ),
                 Text(
                   "Surname",
                   style: TextStyle(
@@ -67,6 +70,9 @@ class Login extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           fontStyle: FontStyle.normal,
                           color: Color.fromRGBO(174, 227, 156, 1))),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 Text(
                   "Password",

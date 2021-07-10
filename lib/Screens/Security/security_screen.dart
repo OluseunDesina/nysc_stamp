@@ -13,7 +13,7 @@ class _SecurityState extends State<Security> {
     '/security',
     '/welcome',
     '/login'
-]
+  ];
   List<String> items = [
     'Robbery',
     'Riot',
@@ -113,43 +113,43 @@ class _SecurityState extends State<Security> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF269400),
         onPressed: () {
-          showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return Column(
-                  children: [
-                    Icon(Icons.close),
-                    Text('Report Incidence'),
-                    Text('Enter Location'),
-                    TextField(
-                      decoration: InputDecoration(
-                          fillColor: Color.fromRGBO(242, 246, 255, 0.1),
-                          focusColor: Color.fromRGBO(242, 246, 255, 0.1),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(174, 227, 156, 1))),
-                          labelText: 'Enter Surname',
-                          labelStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              color: Color.fromRGBO(174, 227, 156, 1))),
-                    ),
-                    Text('Incident Type'),
-                    ListView.builder(
-                      itemCount: items.length,
-                      itemBuilder: (context, index) {
-                        return Row(children: [
-                          InputChip(
-                            label: Text('${items[index]}'),
-                          ),
-                        ]);
-                      },
-                    )
-                  ],
-                );
-              });
-          // buildShowSecurityStatusModalBottomSheet(context);
+          // showModalBottomSheet(
+          //     context: context,
+          //     builder: (context) {
+          //       return Column(
+          //         children: [
+          //           Icon(Icons.close),
+          //           Text('Report Incidence'),
+          //           Text('Enter Location'),
+          //           TextField(
+          //             decoration: InputDecoration(
+          //                 fillColor: Color.fromRGBO(242, 246, 255, 0.1),
+          //                 focusColor: Color.fromRGBO(242, 246, 255, 0.1),
+          //                 enabledBorder: OutlineInputBorder(
+          //                     borderSide: BorderSide(
+          //                         color: Color.fromRGBO(174, 227, 156, 1))),
+          //                 labelText: 'Enter Surname',
+          //                 labelStyle: TextStyle(
+          //                     fontSize: 15,
+          //                     fontWeight: FontWeight.w400,
+          //                     fontStyle: FontStyle.normal,
+          //                     color: Color.fromRGBO(174, 227, 156, 1))),
+          //           ),
+          //           Text('Incident Type'),
+          //           ListView.builder(
+          //             itemCount: items.length,
+          //             itemBuilder: (context, index) {
+          //               return Row(children: [
+          //                 InputChip(
+          //                   label: Text('${items[index]}'),
+          //                 ),
+          //               ]);
+          //             },
+          //           )
+          //         ],
+          //       );
+          //     });
+          buildShowSecurityStatusModalBottomSheet(context);
         },
         child: Icon(Icons.add),
       ),

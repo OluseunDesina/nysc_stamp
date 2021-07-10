@@ -10,6 +10,7 @@ class Welcome extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // initialRoute: '/welcome',
+      debugShowCheckedModeBanner: false,
       routes: {
         '/welcome': (context) => Welcome(),
         '/login': (context) => Login(),
