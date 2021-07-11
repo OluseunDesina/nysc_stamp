@@ -4,6 +4,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color.fromRGBO(38, 148, 0, 1),
         appBar: AppBar(

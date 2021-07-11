@@ -13,7 +13,7 @@ class _SecurityState extends State<Security> {
     '/security',
     '/welcome',
     '/login'
-]
+  ];
   List<String> items = [
     'Robbery',
     'Riot',
@@ -113,43 +113,7 @@ class _SecurityState extends State<Security> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF269400),
         onPressed: () {
-          showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return Column(
-                  children: [
-                    Icon(Icons.close),
-                    Text('Report Incidence'),
-                    Text('Enter Location'),
-                    TextField(
-                      decoration: InputDecoration(
-                          fillColor: Color.fromRGBO(242, 246, 255, 0.1),
-                          focusColor: Color.fromRGBO(242, 246, 255, 0.1),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(174, 227, 156, 1))),
-                          labelText: 'Enter Surname',
-                          labelStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              color: Color.fromRGBO(174, 227, 156, 1))),
-                    ),
-                    Text('Incident Type'),
-                    ListView.builder(
-                      itemCount: items.length,
-                      itemBuilder: (context, index) {
-                        return Row(children: [
-                          InputChip(
-                            label: Text('${items[index]}'),
-                          ),
-                        ]);
-                      },
-                    )
-                  ],
-                );
-              });
-          // buildShowSecurityStatusModalBottomSheet(context);
+          buildShowReportInidenceModalBottomSheet(context);
         },
         child: Icon(Icons.add),
       ),
@@ -185,6 +149,249 @@ class _SecurityState extends State<Security> {
         },
       ),
     );
+  }
+
+  Future<dynamic> buildShowReportInidenceModalBottomSheet(
+      BuildContext context) {
+    return showModalBottomSheet(
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        context: context,
+        builder: (context) {
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.70,
+            padding:
+                const EdgeInsets.only(top: 30, left: 20, bottom: 30, right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      child: Icon(Icons.close),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+                Text(
+                  'Report Incidence',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                    color: Color(0xFF269400),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Enter Location',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                    color: Color(0xFF535C6F),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  height: 40,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.search,
+                        size: 18,
+                      ),
+                      fillColor: Color.fromRGBO(242, 246, 255, 0.1),
+                      focusColor: Color.fromRGBO(242, 246, 255, 0.1),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                              color: Color.fromRGBO(174, 227, 156, 1))),
+                      labelText: 'Search location',
+                      labelStyle: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        color: Color(0xFF929AAB),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Incident Type',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                    color: Color(0xFF535C6F),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                // ListView.builder(
+                //   scrollDirection: Axis.vertical,
+                //   shrinkWrap: true,
+                //   itemCount: items.length,
+                //   itemBuilder: (context, index) {
+                //     return InputChip(
+                //       label: Text('${items[index]}'),
+                //     );
+                //   },
+                // )
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InputChip(
+                      backgroundColor: Color(0xFF269400),
+                      labelPadding: EdgeInsets.symmetric(horizontal: 10),
+                      label: Text('${items[0]}'),
+                      labelStyle: TextStyle(color: Color(0xFFFFFFFF)),
+                      deleteIcon: Icon(
+                        Icons.check,
+                        color: Color(0xFFFFFFFF),
+                      ),
+                      onDeleted: () {},
+                    ),
+                    InputChip(
+                      backgroundColor: Color(0xFFE4F6DE),
+                      labelPadding: EdgeInsets.symmetric(horizontal: 10),
+                      label: Text('${items[1]}'),
+                      labelStyle: TextStyle(color: Color(0xFF269400)),
+                    ),
+                    InputChip(
+                      backgroundColor: Color(0xFFE4F6DE),
+                      labelPadding: EdgeInsets.symmetric(horizontal: 10),
+                      label: Text('${items[2]}'),
+                      labelStyle: TextStyle(color: Color(0xFF269400)),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InputChip(
+                      backgroundColor: Color(0xFFE4F6DE),
+                      labelPadding: EdgeInsets.symmetric(horizontal: 10),
+                      label: Text('${items[3]}'),
+                      labelStyle: TextStyle(color: Color(0xFF269400)),
+                    ),
+                    InputChip(
+                      backgroundColor: Color(0xFFE4F6DE),
+                      labelPadding: EdgeInsets.symmetric(horizontal: 10),
+                      label: Text('${items[4]}'),
+                      labelStyle: TextStyle(color: Color(0xFF269400)),
+                    ),
+                    InputChip(
+                      backgroundColor: Color(0xFF269400),
+                      labelPadding: EdgeInsets.symmetric(horizontal: 10),
+                      label: Text('${items[5]}'),
+                      labelStyle: TextStyle(color: Color(0xFF269400)),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Enter Location (Optional)',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                    color: Color(0xFF535C6F),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    fillColor: Color.fromRGBO(242, 246, 255, 0.1),
+                    focusColor: Color.fromRGBO(242, 246, 255, 0.1),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color.fromRGBO(174, 227, 156, 1))),
+                    labelText: 'Kindly provide details of incident',
+                    labelStyle: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xFF929AAB),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Add Media',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                    color: Color(0xFF535C6F),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.camera_alt_sharp,
+                      color: Color(0xFF269400),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Picture',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15,
+                        color: Color(0xFF929AAB),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(
+                      Icons.video_camera_back,
+                      color: Color(0xFF269400),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text('Video'),
+                  ],
+                ),
+                Spacer(),
+                SizedBox(
+                  height: 50,
+                  child: ElevatedButton(
+                    child: Text('Submit Report',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 15)),
+                    onPressed: () {
+                      buildShowSecurityStatusModalBottomSheet(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF269400),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
 
   Future<dynamic> buildShowSecurityStatusModalBottomSheet(
