@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nysc/Models/login_user.dart';
 import 'package:nysc/services.dart';
 
 class LoginBody extends StatelessWidget {
@@ -115,6 +116,8 @@ class LoginBody extends StatelessWidget {
                     onPressed: () async {
                       String email = _emailController.text;
                       String password = _passwordController.text;
+                      print(email);
+                      print(password);
                       if (!email.contains('@')) {
                         showDialog(
                             context: context,
@@ -135,10 +138,23 @@ class LoginBody extends StatelessWidget {
                               );
                             });
                       } else {
-                        var res =
+                        Future<dynamic> res =
                             attemptLogin(email: email, password: password);
                         print(res);
+                        // if (res != null) {
                         Navigator.pushNamed(context, '/dashboard');
+                        // Navigator.pushNamed(context, '/dashboard');
+                        // } else {
+                        //   showDialog(
+                        //       context: context,
+                        //       builder: (BuildContext context) {
+                        //         return AlertDialog(
+                        //           title: Text('An Error Occured'),
+                        //           content: Text(
+                        //               'An unexpected error occured while trying to log you in'),
+                        //         );
+                        //       });
+                        // }
                       }
                     },
                     elevation: 0,
