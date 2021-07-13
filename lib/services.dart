@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'dart:io' show Platform;
+import 'dart:io' show HttpHeaders, Platform;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import 'Models/login_user.dart';
 
 // Create storage
@@ -49,4 +48,16 @@ Future attemptLogin({String email, String password}) async {
     // throw Exception('Failed to login');
     return null;
   }
+}
+
+Future broadcastCase(String incident_id, String description, List areas) async {
+  String api = '/api/v1/gateway/broadcast';
+  var url = Uri.parse('$base_url$api}');
+  var res = await http.post(url, body: {
+    "incident_id": incident_id,
+    "description": description,
+    "areas": areas
+  }, headers: {
+    HttpHeaders.authorizationHeader: 'Basic your_api_token_here',
+  });
 }
