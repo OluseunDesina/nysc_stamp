@@ -140,10 +140,21 @@ class LoginBody extends StatelessWidget {
                       } else {
                         print(
                             "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ITS ELSE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                        var res =
-                            attemptLogin(email: email, password: password);
+                        var res = await attemptLogin(
+                            email: email, password: password);
                         print(res);
-                        // Navigator.pushNamed(context, '/dashboard');
+                        if (res != null) {
+                          Navigator.pushNamed(context, '/dashboard');
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Invalid Password'),
+                                  content: Text('Username or password invalid'),
+                                );
+                              });
+                        }
                       }
                     },
                     elevation: 0,

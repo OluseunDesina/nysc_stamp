@@ -13,9 +13,8 @@ class Welcome extends StatelessWidget {
       // initialRoute: '/welcome',
       routes: {
         '/welcome': (context) => Welcome(),
-        // '/login': (context) => Login(),
-        '/login': (context) => Security(),
-        // '/security': (context) => Security(),
+        '/login': (context) => Login(),
+        '/security': (context) => Security(),
         '/dashboard': (context) => Dashboard()
       },
       home: Scaffold(

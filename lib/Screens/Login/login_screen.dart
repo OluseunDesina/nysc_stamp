@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:nysc/Screens/Dashboard/dashboard_screen.dart';
 import 'package:nysc/Screens/Login/components/body.dart';
+import 'package:nysc/Screens/Security/security_screen.dart';
+import 'package:nysc/Screens/Welcome/welcome_screen.dart';
 
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      routes: {
+        '/welcome': (context) => Welcome(),
+        '/login': (context) => Login(),
+        '/security': (context) => Security(),
+        '/dashboard': (context) => Dashboard()
+      },
       home: Scaffold(
         backgroundColor: Color.fromRGBO(38, 148, 0, 1),
         appBar: AppBar(

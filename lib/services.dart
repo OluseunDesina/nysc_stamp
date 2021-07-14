@@ -22,26 +22,29 @@ final storage = new FlutterSecureStorage();
 //             ),
 //     );
 
-// String base_url = 'https://40233fa4-4501-45ff-bd89-65a7d321fdf3.mock.pstmn.io';
-
 String baseUrl = 'http://67.207.69.246';
 Future attemptLogin({String email, String password}) async {
-  String api = '/api/v1/gateway/login';
-  var url = Uri.https(baseUrl, api);
-  var res = await http.post(
-    Uri.parse('http://67.207.69.246/api/v1/gateway/login'),
-    body: {
-      "email": email,
-      "password": password,
-    },
-  );
+  var res =
+      await http.post(Uri.parse('http://67.207.69.246/api/v1/gateway/login'),
+          body: jsonEncode({
+            "email": email.trim().toLowerCase(),
+            "password": password,
+          }),
+          headers: {
+        'Client-Public': '2',
+        'Client-Secret': 'ibTVTRz6TdUi6Byc9tWvQAE4GDz8wAzS9GDvMBkk',
+        'Content-Type': 'application/json',
+        // 'Accept': 'application/json',
+      });
+  // print(res.body);
   if (res.statusCode == 200) {
     //store in variable and local_db
-    LoginUser data = json.decode(res.body);
-    var accessToken = data.token.access_token;
+    dynamic data = json.decode(res.body);
+    var accessToken = data['token']['access_token'];
     // Write value
-    await storage.write(key: "access_token", value: accessToken);
-    // print(res.body);
+    storeVariable("access_token", accessToken);
+    // String value = await getVariable("access_token");
+    // print(value);
     return data;
   } else {
     //use show dialog to show error
@@ -101,4 +104,15 @@ Future broadcastCase(
   // } else {
   //   return null;
   // }
+}
+
+storeVariable(key, value) async {
+  //store data in securestorage
+  await storage.write(key: key, value: value);
+}
+
+Future<String> getVariable(key) async {
+  // get data from secure storage
+  String value = await storage.read(key: key);
+  return value;
 }
