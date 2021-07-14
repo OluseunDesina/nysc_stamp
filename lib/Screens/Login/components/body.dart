@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nysc/Models/login_user.dart';
 import 'package:nysc/services.dart';
 
 class LoginBody extends StatelessWidget {
@@ -115,6 +116,8 @@ class LoginBody extends StatelessWidget {
                     onPressed: () async {
                       String email = _emailController.text;
                       String password = _passwordController.text;
+                      print(email);
+                      print(password);
                       if (!email.contains('@')) {
                         showDialog(
                             context: context,

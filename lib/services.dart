@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io' show File, HttpHeaders, Platform;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'Models/login_user.dart';
+
+// Create storage
+final storage = new FlutterSecureStorage();
 
 // void displayDialog(BuildContext context, String title, String text) =>
 //     showDialog(
@@ -18,20 +23,29 @@ import 'dart:io' show File, HttpHeaders, Platform;
 //     );
 
 // String base_url = 'https://40233fa4-4501-45ff-bd89-65a7d321fdf3.mock.pstmn.io';
+
 String baseUrl = 'http://67.207.69.246';
 Future attemptLogin({String email, String password}) async {
   String api = '/api/v1/gateway/login';
   var url = Uri.https(baseUrl, api);
   var res = await http.post(
-    url,
+    Uri.parse('http://67.207.69.246/api/v1/gateway/login'),
     body: {
       "email": email,
       "password": password,
     },
   );
   if (res.statusCode == 200) {
-    return json.decode(res.body);
+    //store in variable and local_db
+    LoginUser data = json.decode(res.body);
+    var accessToken = data.token.access_token;
+    // Write value
+    await storage.write(key: "access_token", value: accessToken);
+    // print(res.body);
+    return data;
   } else {
+    //use show dialog to show error
+    // throw Exception('Failed to login');
     return null;
   }
 }
