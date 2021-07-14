@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nysc/Screens/Security/security_screen.dart';
-import 'package:nysc/Screens/Welcome/welcome_screen.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -10,12 +8,12 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
 
-  // static List<String> dashboardRoutes = [
-  //   '/dashboard',
-  //   '/security',
-  //   '/welcome',
-  //   '/login'
-  // ];
+  static List<String> dashboardRoutes = [
+    '/dashboard',
+    '/security',
+    '/welcome',
+    '/login'
+  ];
 
   _onItemTapped(int index) {
     Navigator.pushNamed(
@@ -27,6 +25,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color(0xffE5E5E5),
         appBar: AppBar(
@@ -460,7 +459,6 @@ class _DashboardState extends State<Dashboard> {
           onTap: (index) {
             _onItemTapped(index);
           },
-
         ),
       ),
     );

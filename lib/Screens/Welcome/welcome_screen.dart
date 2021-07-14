@@ -9,11 +9,13 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       // initialRoute: '/welcome',
       routes: {
         '/welcome': (context) => Welcome(),
-        '/login': (context) => Login(),
-        '/security': (context) => Security(),
+        // '/login': (context) => Login(),
+        '/login': (context) => Security(),
+        // '/security': (context) => Security(),
         '/dashboard': (context) => Dashboard()
       },
       home: Scaffold(
