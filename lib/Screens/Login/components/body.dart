@@ -138,23 +138,12 @@ class LoginBody extends StatelessWidget {
                               );
                             });
                       } else {
-                        Future<dynamic> res =
+                        print(
+                            "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ITS ELSE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        var res =
                             attemptLogin(email: email, password: password);
                         print(res);
-                        // if (res != null) {
-                        Navigator.pushNamed(context, '/dashboard');
                         // Navigator.pushNamed(context, '/dashboard');
-                        // } else {
-                        //   showDialog(
-                        //       context: context,
-                        //       builder: (BuildContext context) {
-                        //         return AlertDialog(
-                        //           title: Text('An Error Occured'),
-                        //           content: Text(
-                        //               'An unexpected error occured while trying to log you in'),
-                        //         );
-                        //       });
-                        // }
                       }
                     },
                     elevation: 0,
