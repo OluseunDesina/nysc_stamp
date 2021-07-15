@@ -34,6 +34,9 @@ class LoginBody extends StatelessWidget {
                   fontStyle: FontStyle.normal,
                   color: Color.fromRGBO(174, 227, 156, 1)),
             ),
+            SizedBox(
+              height: 35,
+            ),
             Text(
               "Surname",
               style: TextStyle(
@@ -59,6 +62,9 @@ class LoginBody extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                       color: Color.fromRGBO(174, 227, 156, 1))),
+            ),
+            SizedBox(
+              height: 20,
             ),
             Text(
               "Password",
@@ -140,10 +146,21 @@ class LoginBody extends StatelessWidget {
                       } else {
                         print(
                             "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ITS ELSE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                        var res =
-                            attemptLogin(email: email, password: password);
+                        var res = await attemptLogin(
+                            email: email, password: password);
                         print(res);
-                        // Navigator.pushNamed(context, '/dashboard');
+                        if (res != null) {
+                          Navigator.pushNamed(context, '/dashboard');
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Invalid Password'),
+                                  content: Text('Username or password invalid'),
+                                );
+                              });
+                        }
                       }
                     },
                     elevation: 0,
