@@ -10,6 +10,14 @@ class Body extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // Center(
+              //   child: Image(
+              //     image: AssetImage('images/stamp.png'),
+              //     width: 100,
+              //     height: 100,
+              //     fit: BoxFit.cover,
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 40.0),
                 child: RaisedButton(

@@ -11,8 +11,8 @@ class _DashboardState extends State<Dashboard> {
   static List<String> dashboardRoutes = [
     '/dashboard',
     '/security',
-    '/welcome',
-    '/login'
+    '/dashboard',
+    '/dashboard'
   ];
 
   _onItemTapped(int index) {
@@ -55,7 +55,7 @@ class _DashboardState extends State<Dashboard> {
                 height: 5,
               ),
               Text(
-                "Dracharys Snow",
+                "Ladipo Rafiu",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     fontSize: 20,

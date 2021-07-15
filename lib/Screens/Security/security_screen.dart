@@ -12,8 +12,8 @@ class _SecurityState extends State<Security> {
   static List<String> dashboardRoutes = [
     '/dashboard',
     '/security',
-    '/welcome',
-    '/login'
+    '/security',
+    '/security'
   ];
 
   _onItemTapped(int index) {
@@ -45,7 +45,7 @@ class _SecurityState extends State<Security> {
                 width: 5,
               ),
               Text(
-                'Damilola',
+                'Ladipo Rafiu',
                 style: TextStyle(
                     color: Color(0xFF2C3F28),
                     fontSize: 20,
