@@ -62,8 +62,8 @@ Future broadcastCase(
 ) async {
   String api = '/api/v1/gateway/incident';
   var url = Uri.parse('$baseUrl$api');
-  print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<");
-  print(url);
+  // print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<");
+  // print(url);
 
 // (String filename, String url) async {
 //   var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -75,14 +75,14 @@ Future broadcastCase(
 //   );
 //   var res = await request.send();
 // }
+  String accessToken = await getVariable('access_token');
   var request = http.MultipartRequest('POST', url);
   request.files.add(await http.MultipartFile.fromPath("image", image.path));
   request.files.add(await http.MultipartFile.fromPath("video", video.path));
   request.fields['type'] = type;
   request.fields['description'] = description;
   request.fields['location'] = location;
-  request.headers['authorization'] =
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZmJhNDRkMDAwMTZjZjZiYzZkMzRjMzU2YmFjMjY5YjcxMDkyMTRhNTFmMzAyMzg4NDEyODI1Nzg2Yjk2ZWMzYWY1NjkwZjE3MmRiMmQwODgiLCJpYXQiOjE2MjYyNzM1MDMuNzA2MzcsIm5iZiI6MTYyNjI3MzUwMy43MDYzNzUsImV4cCI6MTYyNjM1OTkwMy42NzcwODIsInN1YiI6IjIiLCJzY29wZXMiOltdfQ.gHYSlJ_pHPg5LDv_wMbH0PpDeQOnc86NyBVlo8j6DFtpWD6H_-dSw3qeD1p-CZOPErjPL_mU6pqXjjGiXY4e6uI3yu5oIxB4csW3pFPoTZ1vbt-ObJX6L2OHtrJcRXQNCyF1I4GsoCFz6z3t8jldDupI2mRrieCT3cWDE_r0jWN3q7fbRNb0Ja5GfPabnHQ8kOynah6RwqlsTUKW5KE8j2hckf24iZdLkpCZXzRhIBsqVFiTbiG6-zcdyoAWx7sjBMOZfwDHNMBLiOlHcxTRwK8PHksTKQQJ6Yhm0uL-dgywwZHa8OURQFqfICQoFrkfVVJdzkYTfingRVQkvxess6rx4N4c53A9P0MZYjrCqSr3gskNEoJdc5z3qWpK7WlbLOQX2MXaFXxl_a39Abh8UV3ATiiUueLb9lyfyznYsire_19dhGbYc5Xf36MxeKpWr0xcco5N1Ad0ibAuZxVepVCwbUWXgAsVjptVD9fOITUTz-8YwJZG6eQtTd1WGJqWUKEca2i8GYHVrC3EqMhmWkidsl7sVmU6KYXIXaJarzG7cWa9m2H9zMz2oWznvgcNRoSGfpSrMTSuq0GtlMSJNB3a43jWJMYwG2s_186dhSiknn15epX0M6_BSwvizC9Fq6J2xfMr4H8cE_OStKWc9XJ1Z7xWJDIaTU6BTe6Yo9A';
+  request.headers['authorization'] = 'Bearer $accessToken';
 
   var response = await request.send();
   print(response.statusCode);
