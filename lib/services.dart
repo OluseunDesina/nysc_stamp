@@ -24,13 +24,13 @@ final storage = new FlutterSecureStorage();
 
 String baseUrl = 'http://67.207.69.246';
 Future attemptLogin({String email, String password}) async {
-  var res =
-      await http.post(Uri.parse('http://67.207.69.246/api/v1/gateway/login'),
-          body: jsonEncode({
-            "email": email.trim().toLowerCase(),
-            "password": password,
-          }),
-          headers: {
+  String api = '/api/v1/gateway/login';
+  var res = await http.post(Uri.parse('$baseUrl$api'),
+      body: jsonEncode({
+        "email": email.trim().toLowerCase(),
+        "password": password,
+      }),
+      headers: {
         'Client-Public': '2',
         'Client-Secret': 'ibTVTRz6TdUi6Byc9tWvQAE4GDz8wAzS9GDvMBkk',
         'Content-Type': 'application/json',
