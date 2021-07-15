@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io' show File, HttpHeaders, Platform;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:nysc/Models/broadcast_case.dart';
 import 'Models/login_user.dart';
 
 // Create storage
@@ -36,7 +37,7 @@ Future attemptLogin({String email, String password}) async {
         'Content-Type': 'application/json',
         // 'Accept': 'application/json',
       });
-  // print(res.body);
+  print(res.body);
   if (res.statusCode == 200) {
     //store in variable and local_db
     dynamic data = json.decode(res.body);
@@ -53,57 +54,38 @@ Future attemptLogin({String email, String password}) async {
   }
 }
 
-Future broadcastCase(
+Future<BroadcastCase> broadcastCase(
   String type,
   String description,
-  String location,
+  String location, {
   File image,
   File video,
-) async {
+}) async {
   String api = '/api/v1/gateway/incident';
   var url = Uri.parse('$baseUrl$api');
-  // print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<");
-  // print(url);
-
-// (String filename, String url) async {
-//   var request = http.MultipartRequest('POST', Uri.parse(url));
-//   request.files.add(
-//     await http.MultipartFile.fromPath(
-//       'picture',
-//       filename
-//     )
-//   );
-//   var res = await request.send();
-// }
   String accessToken = await getVariable('access_token');
   var request = http.MultipartRequest('POST', url);
-  request.files.add(await http.MultipartFile.fromPath("image", image.path));
-  request.files.add(await http.MultipartFile.fromPath("video", video.path));
+  if (image != null) {
+    request.files.add(await http.MultipartFile.fromPath("image", image.path));
+  }
+  if (video != null) {
+    request.files.add(await http.MultipartFile.fromPath("video", video.path));
+  }
   request.fields['type'] = type;
   request.fields['description'] = description;
   request.fields['location'] = location;
   request.headers['authorization'] = 'Bearer $accessToken';
 
-  var response = await request.send();
-  print(response.statusCode);
-
-  // var res = await http.post(url, body: {
-  //   "type": type,
-  //   "description": description,
-  //   "location": location,
-  //   "image": image,
-  //   "video": video
-  // }, headers: {
-  //   HttpHeaders.authorizationHeader: 'Basic your_api_token_here',
-  // });
-
-  // print(res.statusCode);
-  // if (res.statusCode == 200) {
-  //   print(res);
-  //   return json.decode(res.body);
-  // } else {
-  //   return null;
-  // }
+  var streamedResponse = await request.send();
+  print(streamedResponse.statusCode);
+  print(streamedResponse);
+  if (streamedResponse.statusCode == 201) {
+    var response = await http.Response.fromStream(streamedResponse);
+    print(response.body);
+    return BroadcastCase.fromJson(jsonDecode(response.body));
+  } else {
+    return null;
+  }
 }
 
 storeVariable(key, value) async {

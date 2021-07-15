@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:nysc/Models/broadcast_case.dart';
 import 'package:nysc/Screens/Security/components/security_status_modal.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nysc/services.dart';
@@ -342,7 +343,7 @@ Future<dynamic> buildShowReportInidenceModalBottomSheet(BuildContext context) {
                     child: Text('Submit Report',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 15)),
-                    onPressed: () {
+                    onPressed: () async {
                       location = _locationController.text;
                       description = _descriptionController.text;
                       // image
@@ -380,8 +381,31 @@ Future<dynamic> buildShowReportInidenceModalBottomSheet(BuildContext context) {
                       } else {
                         type = incidence[selectedIncidentIndex];
                         // ,
-                        dynamic res = broadcastCase(
-                            type, description, location, _image, _video);
+                        BroadcastCase res = await broadcastCase(
+                            type, description, location,
+                            image: _image, video: _video);
+                        if (res != null) {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Success'),
+                                  content: Text(
+                                    res.message,
+                                  ),
+                                );
+                              });
+                          Navigator.pop(context);
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Error'),
+                                  content: Text('An error occured'),
+                                );
+                              });
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(
